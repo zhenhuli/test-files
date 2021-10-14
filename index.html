@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test-files</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    #app {
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 1200px;
+    }
+
+    .template-prefix + * {
+      display: none;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      background: #f0f0f0;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .file-img {
+      max-width: 200px;
+    }
+    .file-video {
+      max-width: 400px;
+    }
+    .file-audio {
+      border: 1px solid #ccc;
+      border-radius: 999px;
+    }
+    .file-img, .file-video {
+       border-radius: 20px;
+     }
+    .file-img, .file-video, .file-audio {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .download-wrap {
+      margin-top: .5em;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="template-prefix" v-if="false">loading...</div>
+
+    <ul v-for="group in groups">
+      <li>
+        <div>{{group.title}}</div>
+        <ul>
+          <li v-for="file in group.files" class="card">
+            <div>
+              <img v-if="group.type === 'image'" :src="group.path + file.name" :alt="file.name" class="file-img" />
+              <video v-if="group.type === 'video'" :src="group.path + file.name" controls :alt="file.name" class="file-video">Your
+                browser does not support the video element.</video>
+              <audio v-if="group.type === 'audio'" :src="group.path + file.name" controls :alt="file.name" class="file-audio">Your
+                browser does not support the audio element.</audio>
+            </div>
+
+            <div>
+              <div>
+                <a :href="group.path + file.name" target="_blank">{{file.name}}</a> <span>({{file.size}}kb)</span>
+              </div>
+              <div class="download-wrap">
+                <a href="group.path + file.name" :download="file.name">download</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script src="./js//data.js"></script>
+  <script src="./js//index.js"></script>
+</body>
+</html>
